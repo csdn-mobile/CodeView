@@ -2,7 +2,6 @@ package net.csdn.codeview.adapters
 
 import android.annotation.SuppressLint
 import android.content.Context
-import android.graphics.Typeface
 import android.util.SparseArray
 import android.view.LayoutInflater
 import android.view.View
@@ -159,12 +158,9 @@ abstract class AbstractCodeAdapter<T> : RecyclerView.Adapter<AbstractCodeAdapter
                 setBackgroundColor(options.theme.bgContent.color())
 
                 with(findViewById<TextView>(R.id.tv_line_num)) {
-                    typeface = options.font
                     setTextColor(options.theme.numColor.color())
                     setBackgroundColor(options.theme.bgNum.color())
                 }
-
-                findViewById<TextView>(R.id.tv_line_content).typeface = options.font
 
                 return if (viewType == ViewHolderType.Line.viewType) {
                     layoutParams.height = dpToPx(context, options.format.lineHeight)
@@ -287,7 +283,6 @@ abstract class AbstractCodeAdapter<T> : RecyclerView.Adapter<AbstractCodeAdapter
  * @param code Code content
  * @param language Programming language to highlight
  * @param theme Color theme
- * @param font Font typeface
  * @param format How much space is content took?
  * @param animateOnHighlight Is animate on highlight?
  * @param shadows Is border shadows needed?
@@ -303,7 +298,6 @@ data class Options(
         var code: String = "",
         var language: String? = null,
         var theme: ColorThemeData = ColorTheme.DEFAULT.theme(),
-        var font: Typeface = FontCache.get(context).getTypeface(context),
         var format: Format = Format.Compact,
         var animateOnHighlight: Boolean = true,
         var shadows: Boolean = false,
@@ -324,11 +318,6 @@ data class Options(
     fun withTheme(theme: ColorTheme) = apply { this.theme = theme.theme() }
     fun setTheme(theme: ColorTheme) { withTheme(theme) }
 
-    fun withFont(font: Font) = apply { this.font = font.get() }
-    fun withFont(font: Typeface) = font saveAndThen { apply { this.font = font } }
-    fun withFont(fontPath: String) = apply { this.font = fontPath.get() }
-    fun setFont(fontPath: String) { withFont(fontPath) }
-    fun setFont(font: Font) { withFont(font) }
     fun withFormat(format: Format) = apply { this.format = format }
 
     fun animateOnHighlight() = apply { animateOnHighlight = true }
@@ -348,13 +337,6 @@ data class Options(
     companion object Default {
         fun get(context: Context) = Options(context)
     }
-
-    // - Font helpers
-
-    private val fontCache = FontCache.get(context)
-    private fun Font.get() = fontCache.getTypeface(context, this)
-    private fun String.get() = fontCache.getTypeface(context, this)
-    private infix fun <T> Typeface.saveAndThen(body: () -> T): T = fontCache.saveTypeface(this).let { body() }
 }
 
 data class Format(

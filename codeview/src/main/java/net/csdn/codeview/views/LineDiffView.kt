@@ -6,7 +6,6 @@ import android.widget.RelativeLayout
 import android.widget.TextView
 import androidx.core.content.ContextCompat
 import net.csdn.codeview.R
-import net.csdn.codeview.highlight.FontCache
 
 /**
  * @class CodeDiffView
@@ -39,7 +38,6 @@ class LineDiffView(context: Context) : RelativeLayout(context) {
         fun create(context: Context, model: DiffModel) = LineDiffView(context).apply {
             tvLineDiff.text = if (model.isAddition) "+" else "-"
             tvLineContent.text = model.content
-            tvLineContent.typeface = FontCache.get(context).getTypeface(context)
 
             setBackgroundColor(ContextCompat.getColor(context,
                     if (model.isAddition)

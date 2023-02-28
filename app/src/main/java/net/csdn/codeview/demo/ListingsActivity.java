@@ -8,7 +8,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import net.csdn.codeview.CodeView;
 import net.csdn.codeview.adapters.Options;
 import net.csdn.codeview.highlight.ColorTheme;
-import net.csdn.codeview.highlight.Font;
 
 import kotlin.Unit;
 import kotlin.jvm.functions.Function1;
@@ -54,7 +53,6 @@ public class ListingsActivity extends AppCompatActivity {
 //                getString(R.string.listing_js),         // code
 //                "js",                                   // language
 //                ColorTheme.MONOKAI.theme(),             // theme (data)
-//                FontCache.get(this).getTypeface(this),  // font
 //                Format.Default.getCompact(),            // format
 //                true,                                   // animate on highlight
 //                true,                                   // shadows visible
@@ -135,7 +133,6 @@ public class ListingsActivity extends AppCompatActivity {
                 "import io.github.kbiakov.codeview.highlight.ColorTheme;\n" +
                 "import io.github.kbiakov.codeview.highlight.ColorThemeData;\n" +
                 "import io.github.kbiakov.codeview.highlight.Font;\n" +
-                "import io.github.kbiakov.codeview.highlight.FontCache;\n" +
                 "import io.github.kbiakov.codeview.views.DiffModel;\n" +
                 "\n" +
                 "public class ListingsActivity extends AppCompatActivity {\n" +
@@ -161,8 +158,7 @@ public class ListingsActivity extends AppCompatActivity {
         codeView.updateOptions(new Function1<Options, Unit>() {
             @Override
             public Unit invoke(Options options) {
-                options.withFont(Font.Consolas)
-                        .withTheme(ColorTheme.SOLARIZED_LIGHT)
+                options.withTheme(ColorTheme.SOLARIZED_LIGHT)
                         .withShadows()
                         .setShortcut(false);
                 return null;
