@@ -16,7 +16,6 @@ import net.csdn.codeview.adapters.AbstractCodeAdapter.ViewHolderType.Companion.L
 import net.csdn.codeview.classifier.CodeClassifier
 import net.csdn.codeview.classifier.CodeProcessor
 import net.csdn.codeview.highlight.*
-import net.csdn.codeview.R
 import java.util.*
 
 /**
@@ -154,22 +153,22 @@ abstract class AbstractCodeAdapter<T> : RecyclerView.Adapter<AbstractCodeAdapter
     // - View holder callbacks
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder =
-            with(LayoutInflater.from(parent.context).inflate(R.layout.item_code_line, parent, false)) {
-                setBackgroundColor(options.theme.bgContent.color())
+        with(LayoutInflater.from(parent.context).inflate(R.layout.item_code_line, parent, false)) {
+            setBackgroundColor(options.theme.bgContent.color())
 
-                with(findViewById<TextView>(R.id.tv_line_num)) {
-                    setTextColor(options.theme.numColor.color())
-                    setBackgroundColor(options.theme.bgNum.color())
-                }
-
-                return if (viewType == ViewHolderType.Line.viewType) {
-                    layoutParams.height = dpToPx(context, options.format.lineHeight)
-                    LineViewHolder(this).apply { setIsRecyclable(false) }
-                } else {
-                    layoutParams.height = dpToPx(context, options.format.borderHeight)
-                    BorderViewHolder(this)
-                }
+            with(findViewById<TextView>(R.id.tv_line_num)) {
+                setTextColor(options.theme.numColor.color())
+                setBackgroundColor(options.theme.bgNum.color())
             }
+
+            return if (viewType == ViewHolderType.Line.viewType) {
+                layoutParams.height = dpToPx(context, options.format.lineHeight)
+                LineViewHolder(this).apply { setIsRecyclable(false) }
+            } else {
+                layoutParams.height = dpToPx(context, options.format.borderHeight)
+                BorderViewHolder(this)
+            }
+        }
 
     override fun onBindViewHolder(holder: ViewHolder, pos: Int) {
         if (holder is LineViewHolder) {
@@ -243,7 +242,7 @@ abstract class AbstractCodeAdapter<T> : RecyclerView.Adapter<AbstractCodeAdapter
             private fun Int.lineEndIdx() = this - BordersCount
 
             fun get(pos: Int, n: Int) = when (pos) {
-                in LineStartIdx .. n.lineEndIdx() ->
+                in LineStartIdx..n.lineEndIdx() ->
                     ViewHolderType.Line.viewType
                 else ->
                     ViewHolderType.Border.viewType
@@ -284,8 +283,6 @@ abstract class AbstractCodeAdapter<T> : RecyclerView.Adapter<AbstractCodeAdapter
  * @param language Programming language to highlight
  * @param theme Color theme
  * @param format How much space is content took?
- * @param animateOnHighlight Is animate on highlight?
- * @param shadows Is border shadows needed?
  * @param maxLines Max lines to show (when limit is reached, rest is dropped)
  * @param shortcut Do you want to show shortcut of code listing?
  * @param shortcutNote When rest lines is dropped, note is shown as last string
@@ -294,38 +291,38 @@ abstract class AbstractCodeAdapter<T> : RecyclerView.Adapter<AbstractCodeAdapter
  * @author Kirill Biakov
  */
 data class Options(
-        val context: Context,
-        var code: String = "",
-        var language: String? = null,
-        var theme: ColorThemeData = ColorTheme.DEFAULT.theme(),
-        var format: Format = Format.Compact,
-        var animateOnHighlight: Boolean = true,
-        var shadows: Boolean = false,
-        var shortcut: Boolean = false,
-        var shortcutNote: String = context.getString(R.string.show_all),
-        var maxLines: Int = 0,
-        var lineClickListener: OnCodeLineClickListener? = null
+    val context: Context,
+    var code: String = "",
+    var language: String? = null,
+    var theme: ColorThemeData = ColorTheme.DEFAULT.theme(),
+    var format: Format = Format.Compact,
+    var shortcut: Boolean = false,
+    var shortcutNote: String = context.getString(R.string.show_all),
+    var maxLines: Int = 0,
+    var lineClickListener: OnCodeLineClickListener? = null
 ) {
 
     internal var isHighlighted: Boolean = false
 
     fun withCode(code: String) = apply { this.code = code }
     fun withCode(codeResId: Int) = apply { code = context.getString(codeResId) }
-    fun setCode(codeResId: Int) { withCode(codeResId) }
+    fun setCode(codeResId: Int) {
+        withCode(codeResId)
+    }
+
     fun withLanguage(language: String) = apply { this.language = language }
 
     fun withTheme(theme: ColorThemeData) = apply { this.theme = theme }
     fun withTheme(theme: ColorTheme) = apply { this.theme = theme.theme() }
-    fun setTheme(theme: ColorTheme) { withTheme(theme) }
+    fun setTheme(theme: ColorTheme) {
+        withTheme(theme)
+    }
 
     fun withFormat(format: Format) = apply { this.format = format }
 
-    fun animateOnHighlight() = apply { animateOnHighlight = true }
-    fun disableHighlightAnimation() = apply { animateOnHighlight = false }
-    fun withShadows() = apply { shadows = true }
-    fun withoutShadows() = apply { shadows = false }
+    fun addCodeLineClickListener(listener: OnCodeLineClickListener) =
+        apply { lineClickListener = listener }
 
-    fun addCodeLineClickListener(listener: OnCodeLineClickListener) = apply { lineClickListener = listener }
     fun removeCodeLineClickListener() = apply { lineClickListener = null }
 
     fun shortcut(maxLines: Int, shortcutNote: String) = apply {
@@ -340,10 +337,10 @@ data class Options(
 }
 
 data class Format(
-        val scaleFactor: Float = 1f,
-        val lineHeight: Int = (LineHeight * scaleFactor).toInt(),
-        val borderHeight: Int = (BorderHeight * scaleFactor).toInt(),
-        val fontSize: Float = FontSize.toFloat()
+    val scaleFactor: Float = 1f,
+    val lineHeight: Int = (LineHeight * scaleFactor).toInt(),
+    val borderHeight: Int = (BorderHeight * scaleFactor).toInt(),
+    val fontSize: Float = FontSize.toFloat()
 ) {
 
     companion object Default {

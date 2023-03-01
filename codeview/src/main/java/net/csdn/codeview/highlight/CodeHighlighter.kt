@@ -188,22 +188,6 @@ data class SyntaxColors(
         val attrName: Int = 0x268BD2,
         val attrValue: Int = 0x269186)
 
-/**
- * Font presets.
- */
-enum class Font {
-    Consolas,
-    CourierNew,
-    DejaVuSansMono,
-    DroidSansMonoSlashed,
-    Inconsolata,
-    Monaco;
-
-    companion object {
-        val Default = DroidSansMonoSlashed
-    }
-}
-
 // - Helpers
 
 /**

@@ -12,18 +12,6 @@ import java.io.BufferedReader
 import java.io.InputStreamReader
 import java.util.concurrent.Executors
 
-object Const {
-    val DefaultDelay = 250L
-
-    object Alpha {
-        val Visible = 1f
-        val Initial = 0.7f
-
-        val AlmostInvisible = 0.1f
-        val Invisible = 0f
-    }
-}
-
 /**
  * Get px by dip value.
  *
@@ -32,8 +20,10 @@ object Const {
  * @return Converted to px value
  */
 fun dpToPx(context: Context, dp: Int) =
-        TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP,
-                dp.toFloat(), context.resources.displayMetrics).toInt()
+    TypedValue.applyDimension(
+        TypedValue.COMPLEX_UNIT_DIP,
+        dp.toFloat(), context.resources.displayMetrics
+    ).toInt()
 
 /**
  * Split string by space.
@@ -107,17 +97,8 @@ object Thread {
      * @param asyncBody Async operation body
      * @param uiBody UI operation body
      */
-    fun <T> asyncUi(asyncBody: () -> T, uiBody: (T) -> Unit) = async { asyncBody().also { ui { uiBody(it)} } }
-
-    /**
-     * Delayed block call.
-     *
-     * @param body Operation body
-     * @param delayMs Delay in m
-     */
-    fun delayed(delayMs: Long = Const.DefaultDelay, body: () -> Unit) {
-        Handler().postDelayed(body, delayMs)
-    }
+    fun <T> asyncUi(asyncBody: () -> T, uiBody: (T) -> Unit) =
+        async { asyncBody().also { ui { uiBody(it) } } }
 
     // - Extensions for block manipulations
 
