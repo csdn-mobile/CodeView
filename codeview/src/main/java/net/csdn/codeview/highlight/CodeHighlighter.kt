@@ -116,6 +116,42 @@ enum class ColorTheme(
             bgNum = 0x272822,
             noteColor = 0xCFD0C2),
 
+    CSDN_DAY(
+        syntaxColors = SyntaxColors(
+            type = 0xCD9E49,
+            keyword = 0xBD5CBA,
+            literal = 0xAD8643,
+            comment = 0x76715E,
+            string = 0x76B474,
+            punctuation = 0xD45772,
+            plain = 0xD45772,
+            tag = 0xF92672,
+            declaration = 0xFA2772,
+            attrName = 0xA6E22E,
+            attrValue = 0xE6DB74),
+        numColor = 0x48483E,
+        bgContent = 0xFAFAFC,
+        bgNum = 0xFAFAFC,
+        noteColor = 0xCFD0C2),
+
+    CSDN_NIGHT(
+        syntaxColors = SyntaxColors(
+            type = 0xCD9E49,
+            keyword = 0xBD5CBA,
+            literal = 0xAD8643,
+            comment = 0x76715E,
+            string = 0x76B474,
+            punctuation = 0xD45772,
+            plain = 0xD45772,
+            tag = 0xF92672,
+            declaration = 0xFA2772,
+            attrName = 0xA6E22E,
+            attrValue = 0xE6DB74),
+        numColor = 0x48483E,
+        bgContent = 0x33333D,
+        bgNum = 0x33333D,
+        noteColor = 0xCFD0C2),
+
     DEFAULT(
             numColor = 0x99A8B7,
             bgContent = 0xE9EDF4,

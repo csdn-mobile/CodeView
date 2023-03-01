@@ -3,4 +3,20 @@
     <color name="colorPrimary">#3F51B5</color>
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
+
+    <color name="type">#A7E22E</color>
+    <color name="keyword">#FA2772</color>
+    <color name="literal">#66D9EE</color>
+    <color name="comment">#76715E</color>
+    <color name="string">#E6DB74</color>
+    <color name="punctuation">#C1C1C1</color>
+    <color name="plain">#F8F8F0</color>
+    <color name="tag">#F92672</color>
+    <color name="declaration">#FA2772</color>
+    <color name="attrName">#A6E22E</color>
+    <color name="attrValue">#E6DB74</color>
+    <color name="numColor">#48483E</color>
+    <color name="bgContent">#272822</color>
+    <color name="bgNum">#272822</color>
+    <color name="noteColor">#CFD0C2</color>
 </resources>

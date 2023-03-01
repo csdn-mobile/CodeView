@@ -15,8 +15,10 @@ import net.csdn.codeview.adapters.AbstractCodeAdapter.ViewHolderType.Companion.B
 import net.csdn.codeview.adapters.AbstractCodeAdapter.ViewHolderType.Companion.LineStartIdx
 import net.csdn.codeview.classifier.CodeClassifier
 import net.csdn.codeview.classifier.CodeProcessor
-import net.csdn.codeview.highlight.*
-import java.util.*
+import net.csdn.codeview.highlight.CodeHighlighter
+import net.csdn.codeview.highlight.ColorTheme
+import net.csdn.codeview.highlight.ColorThemeData
+import net.csdn.codeview.highlight.color
 
 /**
  * @class AbstractCodeAdapter
@@ -76,7 +78,9 @@ abstract class AbstractCodeAdapter<T> : RecyclerView.Adapter<AbstractCodeAdapter
     internal fun updateCode(newCode: String) {
         options.code = newCode
         prepareCodeLines()
-        notifyDataSetChanged()
+        highlight {
+            notifyDataSetChanged()
+        }
     }
 
     /**
@@ -85,7 +89,9 @@ abstract class AbstractCodeAdapter<T> : RecyclerView.Adapter<AbstractCodeAdapter
     internal fun updateCode(newOptions: Options) {
         options = newOptions
         prepareCodeLines()
-        notifyDataSetChanged()
+        highlight {
+            notifyDataSetChanged()
+        }
     }
 
     /**
@@ -205,6 +211,7 @@ abstract class AbstractCodeAdapter<T> : RecyclerView.Adapter<AbstractCodeAdapter
                 text = context.getString(R.string.dots)
                 textSize = fontSize * Format.ShortcutScale
             }
+            visibility = if (options.showLineNumber) View.VISIBLE else View.GONE
         }
 
         with(holder.tvLineContent) {
@@ -285,6 +292,7 @@ abstract class AbstractCodeAdapter<T> : RecyclerView.Adapter<AbstractCodeAdapter
  * @param format How much space is content took?
  * @param maxLines Max lines to show (when limit is reached, rest is dropped)
  * @param shortcut Do you want to show shortcut of code listing?
+ * @param showLineNumber Hide line number
  * @param shortcutNote When rest lines is dropped, note is shown as last string
  * @param lineClickListener Listener to code line clicks
  *
@@ -297,6 +305,7 @@ data class Options(
     var theme: ColorThemeData = ColorTheme.DEFAULT.theme(),
     var format: Format = Format.Compact,
     var shortcut: Boolean = false,
+    var showLineNumber: Boolean = true,
     var shortcutNote: String = context.getString(R.string.show_all),
     var maxLines: Int = 0,
     var lineClickListener: OnCodeLineClickListener? = null
@@ -304,6 +313,7 @@ data class Options(
 
     internal var isHighlighted: Boolean = false
 
+    fun isShowLineNumber(showLineNumber: Boolean) = apply { this.showLineNumber = showLineNumber }
     fun withCode(code: String) = apply { this.code = code }
     fun withCode(codeResId: Int) = apply { code = context.getString(codeResId) }
     fun setCode(codeResId: Int) {

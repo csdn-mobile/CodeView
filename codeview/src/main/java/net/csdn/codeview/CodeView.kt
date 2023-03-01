@@ -48,6 +48,8 @@ class CodeView @JvmOverloads constructor(
      */
     fun setOptions(options: Options) = setAdapter(CodeWithNotesAdapter(context, options))
 
+//    fun getOptions(): Options = optionsOrDefault
+
     /**
      * Update options or initialize if needed.
      *

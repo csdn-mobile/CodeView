@@ -6,6 +6,7 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import net.csdn.codeview.CodeView;
+import net.csdn.codeview.adapters.Format;
 import net.csdn.codeview.adapters.Options;
 import net.csdn.codeview.highlight.ColorTheme;
 
@@ -36,9 +37,9 @@ public class ListingsActivity extends AppCompatActivity {
          */
 
         // short initialization with default params (can be expanded using with() methods)
-        codeView.setOptions(Options.Default.get(this)
-                .withCode(R.string.listing_py)
-                .withTheme(ColorTheme.MONOKAI));
+//        codeView.setOptions(Options.Default.get(this)
+//                .withCode(R.string.listing_py)
+//                .withTheme(ColorTheme.MONOKAI));
 
         // expanded form of initialization
 //        codeView.setOptions(new Options(
@@ -109,34 +110,38 @@ public class ListingsActivity extends AppCompatActivity {
 
         // - Playground
 //
-//        codeView.setCode("" +
-//                "public class ListingsActivity extends AppCompatActivity {\n" +
-//                "\n" +
-//                "    @Override\n" +
-//                "    protected void onCreate(@Nullable Bundle savedInstanceState) {\n" +
-//                "        super.onCreate(savedInstanceState);\n" +
-//                "        setContentView(R.layout.activity_listings);\n" +
-//                "\n" +
-//                "        final CodeView codeView = (CodeView) findViewById(R.id.code_view);\n" +
-//                "\n" +
-//                "        /*\n" +
-//                "         * 1: set code content\n" +
-//                "         */\n" +
-//                "\n" +
-//                "        // auto language recognition\n" +
-//                "        codeView.setCode(getString(R.string.listing_js));\n" +
-//                "\n" +
-//                "        // specify language for code listing\n" +
-//                "        codeView.setCode(getString(R.string.listing_py), \"py\");" +
-//                "    }\n" +
-//                "}", "java");
-//        codeView.updateOptions(new Function1<Options, Unit>() {
-//            @Override
-//            public Unit invoke(Options options) {
-//                options.withTheme(ColorTheme.SOLARIZED_LIGHT)
-//                        .setShortcut(false);
-//                return null;
-//            }
-//        });
+        // custom theme
+//
+//        ColorTheme colorTheme = new ColorThemeData(
+//                new SyntaxColors()
+//        );
+        codeView.setCode("" +
+                "public class HollowDiamond {\n" +
+                "    public static void main(String[] args) {\n" +
+                "        int size = 5;\n" +
+                "           for (int i = 0; i < size; i++) {\n" +
+                "            for (int j = 0; j < size - i - 1; j++) {\n" +
+                "                System.out.print(\" \");\n" +
+                "            }\n" +
+                "            for (int j = 0; j < 2 * i + 1; j++) {\n" +
+                "                if (i == 0 || i == size - 1 || j == 0 || j == 2 * i) {\n" +
+                "                    System.out.print(\"*\");\n" +
+                "                } else {\n" +
+                "                    System.out.print(\" \");\n" +
+                "                }\n" +
+                "            }\n" +
+                "            System.out.println();\n" +
+                "        }\n" +
+                "    }\n" +
+                "}", "java");
+        codeView.updateOptions(new Function1<Options, Unit>() {
+            @Override
+            public Unit invoke(Options options) {
+                options.isShowLineNumber(false)
+                        .withFormat(new Format(1f, 20, 20, 14))
+                        .withTheme(ColorTheme.CSDN_DAY);
+                return null;
+            }
+        });
     }
 }
