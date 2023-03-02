@@ -8,6 +8,7 @@ import android.view.View.MeasureSpec.makeMeasureSpec
 import android.widget.HorizontalScrollView
 import androidx.recyclerview.widget.RecyclerView
 import net.csdn.codeview.R
+import kotlin.math.abs
 
 /**
  * @class BidirectionalScrollView
@@ -18,6 +19,9 @@ import net.csdn.codeview.R
  * @author Kirill Biakov
  */
 class BidirectionalScrollView : HorizontalScrollView {
+
+    private var downX: Float = 0f;
+    private var moveX: Float = 0f;
 
     constructor(context: Context) : super(context)
     constructor(context: Context, attrs: AttributeSet) : super(context, attrs)
@@ -41,8 +45,22 @@ class BidirectionalScrollView : HorizontalScrollView {
     }
 
     override fun onInterceptTouchEvent(ev: MotionEvent?): Boolean {
+        if (ev == null) {
+            return true;
+        }
+        when (ev.action) {
+            MotionEvent.ACTION_DOWN -> {
+                downX = ev.rawX
+            }
+            MotionEvent.ACTION_MOVE -> {
+                moveX = ev.rawX
+                if (abs(moveX - downX) > 1) {
+                    return false
+                }
+            }
+            else -> {}
+        }
         super.onInterceptTouchEvent(ev)
-        // let touch event be stolen(intercepted) here.
         return true
     }
 

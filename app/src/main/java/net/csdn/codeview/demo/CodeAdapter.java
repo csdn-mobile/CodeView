@@ -8,6 +8,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import net.csdn.codeview.CodeView;
+import net.csdn.codeview.adapters.Format;
 import net.csdn.codeview.adapters.Options;
 import net.csdn.codeview.highlight.ColorTheme;
 
@@ -42,9 +43,6 @@ public class CodeAdapter extends RecyclerView.Adapter<CodeAdapter.CodeViewHolder
         }
 
         public void setData() {
-//            codeView.setOptions(Options.Default.get(itemView.getContext())
-//                    .withCode(R.string.listing_py)
-//                    .withTheme(ColorTheme.MONOKAI));
             codeView.setCode("" +
                     "public class ListingsActivity extends AppCompatActivity {\n" +
                     "\n" +
@@ -69,8 +67,9 @@ public class CodeAdapter extends RecyclerView.Adapter<CodeAdapter.CodeViewHolder
             codeView.updateOptions(new Function1<Options, Unit>() {
                 @Override
                 public Unit invoke(Options options) {
-                    options.withTheme(ColorTheme.SOLARIZED_LIGHT)
-                            .setShortcut(false);
+                    options.isShowLineNumber(true)
+                            .withFormat(new Format(1f, 20, 8, 14))
+                            .withTheme(ColorTheme.CSDN_DAY);
                     return null;
                 }
             });
