@@ -129,9 +129,9 @@ enum class ColorTheme(
             declaration = 0xFA2772,
             attrName = 0xA6E22E,
             attrValue = 0xE6DB74),
-        numColor = 0x48483E,
-        bgContent = 0xFAFAFC,
-        bgNum = 0xFAFAFC,
+        numColor = 0x8F8FA6,
+        bgContent = 0x66F2F2F5,
+        bgNum = 0xF2F2F5,
         noteColor = 0xCFD0C2),
 
     CSDN_NIGHT(
@@ -147,8 +147,8 @@ enum class ColorTheme(
             declaration = 0xFA2772,
             attrName = 0xA6E22E,
             attrValue = 0xE6DB74),
-        numColor = 0x48483E,
-        bgContent = 0x33333D,
+        numColor = 0x8F8FA6,
+        bgContent = 0x6633333D,
         bgNum = 0x33333D,
         noteColor = 0xCFD0C2),
 

@@ -137,8 +137,8 @@ public class ListingsActivity extends AppCompatActivity {
         codeView.updateOptions(new Function1<Options, Unit>() {
             @Override
             public Unit invoke(Options options) {
-                options.isShowLineNumber(false)
-                        .withFormat(new Format(1f, 20, 20, 14))
+                options.isShowLineNumber(true)
+                        .withFormat(new Format(1f, 20, 8, 14))
                         .withTheme(ColorTheme.CSDN_DAY);
                 return null;
             }
