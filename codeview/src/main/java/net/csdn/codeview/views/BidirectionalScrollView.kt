@@ -22,6 +22,8 @@ class BidirectionalScrollView : HorizontalScrollView {
 
     private var downX: Float = 0f;
     private var moveX: Float = 0f;
+    private var downY: Float = 0f;
+    private var moveY: Float = 0f;
 
     constructor(context: Context) : super(context)
     constructor(context: Context, attrs: AttributeSet) : super(context, attrs)
@@ -51,10 +53,15 @@ class BidirectionalScrollView : HorizontalScrollView {
         when (ev.action) {
             MotionEvent.ACTION_DOWN -> {
                 downX = ev.rawX
+                downY = ev.rawY
             }
             MotionEvent.ACTION_MOVE -> {
                 moveX = ev.rawX
+                moveY = ev.rawY
                 if (abs(moveX - downX) > 1) {
+                    return false
+                }
+                if (abs(moveY - downY) > 10) {
                     return false
                 }
             }
