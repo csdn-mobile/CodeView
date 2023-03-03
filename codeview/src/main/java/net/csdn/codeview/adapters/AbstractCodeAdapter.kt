@@ -197,6 +197,7 @@ abstract class AbstractCodeAdapter<T> : RecyclerView.Adapter<AbstractCodeAdapter
         holder.itemView.setOnClickListener {
             options.lineClickListener?.onCodeLineClicked(pos, lines[pos])
         }
+        holder.itemView.setOnLongClickListener { true }
     }
 
     @SuppressLint("SetTextI18n")
