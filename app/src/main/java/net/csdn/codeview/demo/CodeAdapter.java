@@ -9,7 +9,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import net.csdn.codeview.CodeView;
-import net.csdn.codeview.OnCodeAreaClickListener;
+import net.csdn.codeview.OnCodeLineClickListener;
 import net.csdn.codeview.adapters.Format;
 import net.csdn.codeview.adapters.Options;
 import net.csdn.codeview.highlight.ColorTheme;
@@ -42,12 +42,6 @@ public class CodeAdapter extends RecyclerView.Adapter<CodeAdapter.CodeViewHolder
         public CodeViewHolder(@NonNull View itemView) {
             super(itemView);
             codeView = itemView.findViewById(R.id.code_view);
-            codeView.setOnCodeAreaClickListener(new OnCodeAreaClickListener() {
-                @Override
-                public void onClick() {
-                    Toast.makeText(itemView.getContext(), "点击代码成功", Toast.LENGTH_SHORT).show();
-                }
-            });
         }
 
         public void setData() {
@@ -77,7 +71,13 @@ public class CodeAdapter extends RecyclerView.Adapter<CodeAdapter.CodeViewHolder
                 public Unit invoke(Options options) {
                     options.isShowLineNumber(true)
                             .withFormat(new Format(1f, 20, 8, 14))
-                            .withTheme(ColorTheme.CSDN_DAY);
+                            .withTheme(ColorTheme.CSDN_DAY)
+                            .addCodeLineClickListener(new OnCodeLineClickListener() {
+                                @Override
+                                public void onCodeLineClicked(int n, @NonNull String line) {
+                                    Toast.makeText(itemView.getContext(), "点击代码成功", Toast.LENGTH_SHORT).show();
+                                }
+                            });
                     return null;
                 }
             });

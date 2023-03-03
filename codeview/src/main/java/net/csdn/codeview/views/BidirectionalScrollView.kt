@@ -7,7 +7,6 @@ import android.view.View
 import android.view.View.MeasureSpec.makeMeasureSpec
 import android.widget.HorizontalScrollView
 import androidx.recyclerview.widget.RecyclerView
-import net.csdn.codeview.OnCodeAreaClickListener
 import net.csdn.codeview.R
 
 /**
@@ -19,12 +18,6 @@ import net.csdn.codeview.R
  * @author Kirill Biakov
  */
 class BidirectionalScrollView : HorizontalScrollView {
-//    private var downX: Float = 0f;
-//    private var moveX: Float = 0f;
-//    private var downY: Float = 0f;
-//    private var moveY: Float = 0f;
-
-    private var clickListener: OnCodeAreaClickListener? = null
 
     constructor(context: Context) : super(context)
     constructor(context: Context, attrs: AttributeSet) : super(context, attrs)
@@ -41,48 +34,7 @@ class BidirectionalScrollView : HorizontalScrollView {
         codeContentRv = findViewById(R.id.rv_content)
     }
 
-    override fun dispatchTouchEvent(event: MotionEvent): Boolean {
-        // 父层ViewGroup不要拦截点击事件
-        parent.requestDisallowInterceptTouchEvent(true)
-        super.dispatchTouchEvent(event)
-        return true
-    }
-
-    override fun onInterceptTouchEvent(ev: MotionEvent?): Boolean {
-//        if (ev == null) {
-//            return false;
-//        }
-//        when (ev.action) {
-//            MotionEvent.ACTION_DOWN -> {
-//                downX = ev.rawX
-//                downY = ev.rawY
-//            }
-//            MotionEvent.ACTION_MOVE -> {
-//                moveX = ev.rawX
-//                moveY = ev.rawY
-//                if (abs(moveX - downX) > 1) {
-//                    return true
-//                }
-//                if (abs(moveY - downY) > 1) {
-//                    return true
-//                }
-//            }
-//            else -> {}
-//        }
-        super.onInterceptTouchEvent(ev)
-        return true
-    }
-
-    private var lastAction: Int? = null
     override fun onTouchEvent(ev: MotionEvent?): Boolean {
-        if (lastAction != null && lastAction == MotionEvent.ACTION_DOWN && ev != null && ev.action == MotionEvent.ACTION_UP) {
-            clickListener?.onClick()
-        }
-        lastAction = if (ev?.action == MotionEvent.ACTION_UP) {
-            null
-        } else {
-            ev?.action
-        }
         // call recyclerview's and its onTouchEvent here
         // to support cross-direction scrolling like 'scroll' method does before. (eg: 45° left top to right down)
 
@@ -126,8 +78,4 @@ class BidirectionalScrollView : HorizontalScrollView {
     }
 
     private fun makeMeasureSpec(size: Int) = makeMeasureSpec(size, MeasureSpec.UNSPECIFIED)
-
-    fun setOnCodeAreaClickListener(listener: OnCodeAreaClickListener) {
-        this.clickListener = listener;
-    }
 }
