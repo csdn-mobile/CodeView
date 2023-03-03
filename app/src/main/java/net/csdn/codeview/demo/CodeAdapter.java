@@ -3,11 +3,13 @@ package net.csdn.codeview.demo;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import net.csdn.codeview.CodeView;
+import net.csdn.codeview.OnCodeAreaClickListener;
 import net.csdn.codeview.adapters.Format;
 import net.csdn.codeview.adapters.Options;
 import net.csdn.codeview.highlight.ColorTheme;
@@ -40,6 +42,12 @@ public class CodeAdapter extends RecyclerView.Adapter<CodeAdapter.CodeViewHolder
         public CodeViewHolder(@NonNull View itemView) {
             super(itemView);
             codeView = itemView.findViewById(R.id.code_view);
+            codeView.setOnCodeAreaClickListener(new OnCodeAreaClickListener() {
+                @Override
+                public void onClick() {
+                    Toast.makeText(itemView.getContext(), "点击代码成功", Toast.LENGTH_SHORT).show();
+                }
+            });
         }
 
         public void setData() {

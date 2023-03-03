@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 import net.csdn.codeview.adapters.AbstractCodeAdapter
 import net.csdn.codeview.adapters.CodeWithNotesAdapter
 import net.csdn.codeview.adapters.Options
+import net.csdn.codeview.views.BidirectionalScrollView
 
 /**
  * @class CodeView
@@ -24,6 +25,7 @@ class CodeView @JvmOverloads constructor(
 
     private val rvContent: RecyclerView
     private val adapter get() = rvContent.adapter as? AbstractCodeAdapter<*>
+    private var clickListener: OnCodeAreaClickListener? = null
 
     /**
      * Primary constructor.
@@ -137,6 +139,10 @@ class CodeView @JvmOverloads constructor(
             .apply(::setAdapter))
             .updateCode(code)
     }
+
+    fun setOnCodeAreaClickListener(listener: OnCodeAreaClickListener) {
+        findViewById<BidirectionalScrollView>(R.id.v_scroll).setOnCodeAreaClickListener(listener)
+    }
 }
 
 /**
@@ -144,4 +150,11 @@ class CodeView @JvmOverloads constructor(
  */
 interface OnCodeLineClickListener {
     fun onCodeLineClicked(n: Int, line: String)
+}
+
+/**
+ * Provide listener to code area clicks.
+ */
+interface OnCodeAreaClickListener {
+    fun onClick()
 }

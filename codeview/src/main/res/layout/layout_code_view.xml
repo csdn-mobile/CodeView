@@ -7,7 +7,7 @@
     <net.csdn.codeview.views.BidirectionalScrollView
         android:id="@+id/v_scroll"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="100dp"
         android:fillViewport="true">
 
         <androidx.recyclerview.widget.RecyclerView
