@@ -45,6 +45,7 @@ public class CodeAdapter extends RecyclerView.Adapter<CodeAdapter.CodeViewHolder
         }
 
         public void setData() {
+//            codeView.setCode("extension Sequence {\nvar headAndTail: (head: Element, tail: DropWhileSequence<Self>)? {\n    var first: Element? = nil\n    let tail = drop(while: { element in\n        if first == nil {\n            first = element\n            return true\n        } else {\n            return false\n        }\n    })\n    guard let head = first else {\n        return nil\n    }\n    return (head, tail)\n}", "swift");
             codeView.setCode("" +
                     "public class ListingsActivity extends AppCompatActivity {\n" +
                     "\n" +
