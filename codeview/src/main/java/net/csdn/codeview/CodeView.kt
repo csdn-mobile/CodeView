@@ -145,4 +145,5 @@ class CodeView @JvmOverloads constructor(
  */
 interface OnCodeLineClickListener {
     fun onCodeLineClicked(n: Int, line: String)
+    fun onCodeLineLongClicked(n: Int, line: String)
 }

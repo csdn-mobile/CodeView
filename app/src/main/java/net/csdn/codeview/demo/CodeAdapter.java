@@ -78,6 +78,11 @@ public class CodeAdapter extends RecyclerView.Adapter<CodeAdapter.CodeViewHolder
                                 public void onCodeLineClicked(int n, @NonNull String line) {
                                     Toast.makeText(itemView.getContext(), "点击代码成功", Toast.LENGTH_SHORT).show();
                                 }
+
+                                @Override
+                                public void onCodeLineLongClicked(int n, @NonNull String line) {
+
+                                }
                             });
                     return null;
                 }
