@@ -67,6 +67,7 @@ public class CodeAdapter extends RecyclerView.Adapter<CodeAdapter.CodeViewHolder
                     "        codeView.setCode(getString(R.string.listing_py), \"py\");" +
                     "    }\n" +
                     "}", "java");
+//            codeView.setCode("", "java");
             codeView.updateOptions(new Function1<Options, Unit>() {
                 @Override
                 public Unit invoke(Options options) {
@@ -76,7 +77,7 @@ public class CodeAdapter extends RecyclerView.Adapter<CodeAdapter.CodeViewHolder
                             .addCodeLineClickListener(new OnCodeLineClickListener() {
                                 @Override
                                 public void onCodeLineClicked(int n, @NonNull String line) {
-                                    Toast.makeText(itemView.getContext(), "点击代码成功", Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(itemView.getContext(), codeView.getLineNumber() +"=====", Toast.LENGTH_SHORT).show();
                                 }
 
                                 @Override

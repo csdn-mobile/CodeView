@@ -8,7 +8,6 @@ import androidx.recyclerview.widget.RecyclerView
 import net.csdn.codeview.adapters.AbstractCodeAdapter
 import net.csdn.codeview.adapters.CodeWithNotesAdapter
 import net.csdn.codeview.adapters.Options
-import net.csdn.codeview.views.BidirectionalScrollView
 
 /**
  * @class CodeView
@@ -137,6 +136,15 @@ class CodeView @JvmOverloads constructor(
         (adapter ?: CodeWithNotesAdapter(context, options)
             .apply(::setAdapter))
             .updateCode(code)
+    }
+
+    fun getLineNumber(): Int {
+        val itemCount: Int = adapter?.itemCount ?: 0
+        return if (itemCount > 0) {
+            itemCount - 2
+        } else {
+            0
+        }
     }
 }
 
