@@ -78,7 +78,7 @@ abstract class AbstractCodeAdapter<T> : RecyclerView.Adapter<AbstractCodeAdapter
     internal fun updateCode(newCode: String) {
         options.code = newCode
         prepareCodeLines()
-        highlight {
+        autoHightlight {
             notifyDataSetChanged()
         }
     }
@@ -89,7 +89,7 @@ abstract class AbstractCodeAdapter<T> : RecyclerView.Adapter<AbstractCodeAdapter
     internal fun updateCode(newOptions: Options) {
         options = newOptions
         prepareCodeLines()
-        highlight {
+        autoHightlight {
             notifyDataSetChanged()
         }
     }
@@ -104,6 +104,12 @@ abstract class AbstractCodeAdapter<T> : RecyclerView.Adapter<AbstractCodeAdapter
         val notes = footerEntities[num] ?: ArrayList()
         footerEntities.put(num, notes + entity)
         notifyDataSetChanged() // TODO: replace with notifyItemInserted()
+    }
+
+    internal fun autoHightlight(onReady: () -> Unit) {
+        if (options.autoHighlight) {
+            highlight(onReady)
+        }
     }
 
     /**
@@ -312,6 +318,7 @@ data class Options(
     var showLineNumber: Boolean = true,
     var shortcutNote: String = context.getString(R.string.show_all),
     var maxLines: Int = 0,
+    var autoHighlight: Boolean = true,
     var lineClickListener: OnCodeLineClickListener? = null
 ) {
 
@@ -333,6 +340,8 @@ data class Options(
     }
 
     fun withFormat(format: Format) = apply { this.format = format }
+
+    fun withAutoHighlight(hightlight: Boolean) = apply { this.autoHighlight = hightlight }
 
     fun addCodeLineClickListener(listener: OnCodeLineClickListener) =
         apply { lineClickListener = listener }

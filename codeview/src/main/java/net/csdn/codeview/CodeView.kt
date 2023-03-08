@@ -85,7 +85,7 @@ class CodeView @JvmOverloads constructor(
      */
     fun setAdapter(adapter: AbstractCodeAdapter<*>) {
         rvContent.adapter = adapter.apply {
-            highlight { notifyDataSetChanged() }
+            autoHightlight { notifyDataSetChanged() }
         }
     }
 
@@ -144,6 +144,14 @@ class CodeView @JvmOverloads constructor(
             itemCount - 2
         } else {
             0
+        }
+    }
+
+    fun highlight() {
+        adapter?.apply {
+            highlight {
+                notifyDataSetChanged()
+            }
         }
     }
 }

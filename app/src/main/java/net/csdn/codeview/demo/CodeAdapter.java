@@ -42,6 +42,22 @@ public class CodeAdapter extends RecyclerView.Adapter<CodeAdapter.CodeViewHolder
         public CodeViewHolder(@NonNull View itemView) {
             super(itemView);
             codeView = itemView.findViewById(R.id.code_view);
+            codeView.setOptions(Options.Default.get(itemView.getContext())
+                    .isShowLineNumber(true)
+                    .withTheme(ColorTheme.CSDN_DAY)
+                    .withAutoHighlight(false)
+                    .withFormat(new Format(1f, 20, 8, 14))
+                    .addCodeLineClickListener(new OnCodeLineClickListener() {
+                        @Override
+                        public void onCodeLineClicked(int i, @NonNull String s) {
+                            codeView.highlight();
+                            Toast.makeText(itemView.getContext(), codeView.getLineNumber() + "=====", Toast.LENGTH_SHORT).show();
+                        }
+
+                        @Override
+                        public void onCodeLineLongClicked(int i, @NonNull String s) {
+                        }
+                    }));
         }
 
         public void setData() {
@@ -68,26 +84,26 @@ public class CodeAdapter extends RecyclerView.Adapter<CodeAdapter.CodeViewHolder
                     "    }\n" +
                     "}", "java");
 //            codeView.setCode("", "java");
-            codeView.updateOptions(new Function1<Options, Unit>() {
-                @Override
-                public Unit invoke(Options options) {
-                    options.isShowLineNumber(true)
-                            .withFormat(new Format(1f, 20, 8, 14))
-                            .withTheme(ColorTheme.CSDN_DAY)
-                            .addCodeLineClickListener(new OnCodeLineClickListener() {
-                                @Override
-                                public void onCodeLineClicked(int n, @NonNull String line) {
-                                    Toast.makeText(itemView.getContext(), codeView.getLineNumber() +"=====", Toast.LENGTH_SHORT).show();
-                                }
-
-                                @Override
-                                public void onCodeLineLongClicked(int n, @NonNull String line) {
-
-                                }
-                            });
-                    return null;
-                }
-            });
+//            codeView.updateOptions(new Function1<Options, Unit>() {
+//                @Override
+//                public Unit invoke(Options options) {
+//                    options.isShowLineNumber(true)
+//                            .withFormat(new Format(1f, 20, 8, 14))
+//                            .withTheme(ColorTheme.CSDN_DAY)
+//                            .addCodeLineClickListener(new OnCodeLineClickListener() {
+//                                @Override
+//                                public void onCodeLineClicked(int n, @NonNull String line) {
+//                                    Toast.makeText(itemView.getContext(), codeView.getLineNumber() + "=====", Toast.LENGTH_SHORT).show();
+//                                }
+//
+//                                @Override
+//                                public void onCodeLineLongClicked(int n, @NonNull String line) {
+//
+//                                }
+//                            });
+//                    return null;
+//                }
+//            });
 
         }
     }
