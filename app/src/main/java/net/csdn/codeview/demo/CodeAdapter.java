@@ -33,7 +33,7 @@ public class CodeAdapter extends RecyclerView.Adapter<CodeAdapter.CodeViewHolder
 
     @Override
     public int getItemCount() {
-        return 200;
+        return 1;
     }
 
     static class CodeViewHolder extends RecyclerView.ViewHolder {
@@ -61,7 +61,7 @@ public class CodeAdapter extends RecyclerView.Adapter<CodeAdapter.CodeViewHolder
         }
 
         public void setData() {
-//            codeView.setCode("extension Sequence {\nvar headAndTail: (head: Element, tail: DropWhileSequence<Self>)? {\n    var first: Element? = nil\n    let tail = drop(while: { element in\n        if first == nil {\n            first = element\n            return true\n        } else {\n            return false\n        }\n    })\n    guard let head = first else {\n        return nil\n    }\n    return (head, tail)\n}", "swift");
+//            codeView.setCode("可以使用Python来设计一个圆类。\n\n下面是一个简单的圆类示例：\n\n```\nclass Circle:\n    def __init__(self, radius):\n        self.radius = radius\n\n    def area(self):\n        return 3.14 * self.radius ** 2\n\n    def circumference(self):\n        return 2 * 3.14 * self.radius\n```\n\n在上面的代码中，我们定义了一个名为`Circle`的类。该类有一个构造函数`__init__`，它接受一个参数`radius`，并将其存储在类的实例变量`self.radius`中。\n\n类还定义了两个方法：`area`和`circumference`。前者返回圆的面积，后者返回圆的周长。\n\n使用方法：\n```\n>>> c = Circle(10)\n>>> c.area()\n314.0\n>>> c.circumference()\n62.800000000000004\n```\n", "java");
             codeView.setCode("" +
                     "public class ListingsActivity extends AppCompatActivity {\n" +
                     "\n" +

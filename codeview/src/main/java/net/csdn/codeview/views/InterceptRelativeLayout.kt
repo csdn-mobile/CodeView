@@ -25,4 +25,8 @@ class InterceptRelativeLayout : RelativeLayout {
         parent.requestDisallowInterceptTouchEvent(true)
         return super.dispatchTouchEvent(event)
     }
+
+    override fun onInterceptTouchEvent(ev: MotionEvent?): Boolean {
+        return false
+    }
 }

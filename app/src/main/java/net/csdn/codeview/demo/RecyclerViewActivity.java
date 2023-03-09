@@ -1,6 +1,7 @@
 package net.csdn.codeview.demo;
 
 import android.os.Bundle;
+import android.view.MotionEvent;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -17,5 +18,10 @@ public class RecyclerViewActivity extends AppCompatActivity {
         RecyclerView recyclerView = findViewById(R.id.rv);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setAdapter(new CodeAdapter());
+    }
+
+    @Override
+    public boolean dispatchTouchEvent(MotionEvent ev) {
+        return super.dispatchTouchEvent(ev);
     }
 }

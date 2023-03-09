@@ -8,4 +8,8 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
+    <declare-styleable name="MaxHeightLinearLayout">
+        <attr name="llMaxHeight" format="dimension" />
+    </declare-styleable>
+
 </resources>
