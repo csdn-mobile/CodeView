@@ -5,6 +5,7 @@ import android.util.AttributeSet
 import android.widget.RelativeLayout
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import net.csdn.codeview.Thread.delayed
 import net.csdn.codeview.adapters.AbstractCodeAdapter
 import net.csdn.codeview.adapters.CodeWithNotesAdapter
 import net.csdn.codeview.adapters.Options
@@ -147,14 +148,23 @@ class CodeView @JvmOverloads constructor(
         }
     }
 
-    fun highlight() {
-        adapter?.apply {
-            highlight {
-                notifyDataSetChanged()
-            }
+    private fun AbstractCodeAdapter<*>.checkHighlightAnimation(action: () -> Unit) {
+        animate()
+            .setDuration(Const.DefaultDelay * 2)
+            .alpha(Const.Alpha.AlmostInvisible)
+        delayed {
+            animate().alpha(Const.Alpha.Visible)
+            action()
         }
     }
 
+    fun highlight() {
+        adapter?.apply {
+            highlight {
+                checkHighlightAnimation(::notifyDataSetChanged)
+            }
+        }
+    }
 }
 
 /**

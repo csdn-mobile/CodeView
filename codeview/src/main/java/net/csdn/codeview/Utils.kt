@@ -12,6 +12,15 @@ import java.io.BufferedReader
 import java.io.InputStreamReader
 import java.util.concurrent.Executors
 
+object Const {
+    val DefaultDelay = 250L
+
+    object Alpha {
+        val Visible = 1f
+        val AlmostInvisible = 0.1f
+    }
+}
+
 /**
  * Get px by dip value.
  *
@@ -104,6 +113,16 @@ object Thread {
 
     fun (() -> Unit).ui(isUi: Boolean = true) {
         if (isUi) ui(this) else this()
+    }
+
+    /**
+     * Delayed block call.
+     *
+     * @param body Operation body
+     * @param delayMs Delay in m
+     */
+    fun delayed(delayMs: Long = Const.DefaultDelay, body: () -> Unit) {
+        Handler().postDelayed(body, delayMs)
     }
 }
 

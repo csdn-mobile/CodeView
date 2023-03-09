@@ -33,7 +33,7 @@ public class CodeAdapter extends RecyclerView.Adapter<CodeAdapter.CodeViewHolder
 
     @Override
     public int getItemCount() {
-        return 1;
+        return 200;
     }
 
     static class CodeViewHolder extends RecyclerView.ViewHolder {
@@ -44,6 +44,7 @@ public class CodeAdapter extends RecyclerView.Adapter<CodeAdapter.CodeViewHolder
             codeView = itemView.findViewById(R.id.code_view);
             codeView.setOptions(Options.Default.get(itemView.getContext())
                     .isShowLineNumber(true)
+                    .withAutoHighlight(false)
                     .withTheme(ColorTheme.CSDN_DAY)
                     .withFormat(new Format(1f, 20, 8, 14))
                     .addCodeLineClickListener(new OnCodeLineClickListener() {
