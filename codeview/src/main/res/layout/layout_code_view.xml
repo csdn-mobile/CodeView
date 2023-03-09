@@ -4,18 +4,23 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
-    <HorizontalScrollView
+    <net.csdn.codeview.views.BidirectionalScrollView
         android:id="@+id/v_scroll"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:fillViewport="true">
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rv_content"
+        <androidx.core.widget.NestedScrollView
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            tools:listitem="@layout/item_code_line" />
+            android:layout_height="match_parent">
 
-    </HorizontalScrollView>
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rv_content"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                tools:listitem="@layout/item_code_line" />
+        </androidx.core.widget.NestedScrollView>
+
+    </net.csdn.codeview.views.BidirectionalScrollView>
 
 </net.csdn.codeview.views.InterceptRelativeLayout>
